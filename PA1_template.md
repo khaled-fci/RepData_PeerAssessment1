@@ -1,14 +1,9 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
-```{r}
 
+```r
 # Check if file unzipped before
 if(!file.exists('activity.csv')) {
   
@@ -22,8 +17,8 @@ data <- read.csv("activity.csv", sep=",", colClasses = "character")
 
 
 ## What is mean total number of steps taken per day?
-```{r}
 
+```r
 # Convert steps to numeric
 data$steps <- as.numeric(data$steps)
 
@@ -39,18 +34,22 @@ dataMedian <- median(data2[,"steps"])
 ```
 
 #### The Histogram of "Total number of steps taken each day"
-```{r}
+
+```r
 library(ggplot2)
 qplot(data2$steps, geom="histogram", main="Total number of steps taken each day", binwidth=1000, xlab="Steps", fill=I("blue"), col=I("red"), alpha=I(.2))
 ```
 
-#### The total mean is: `r format(dataMean)`
-#### The total median is: `r format(dataMedian)`
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)
+
+#### The total mean is: 10766.19
+#### The total median is: 10765
 
 
 ## What is the average daily activity pattern?
 
-```{r message=FALSE}
+
+```r
 library(dplyr)
 data$interval <- as.numeric(data$interval)
 dataAverages <- data %>% group_by(interval) %>% summarize(mean(steps))
