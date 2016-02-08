@@ -117,6 +117,14 @@ maxAverageInterval &lt;- row$interval</code></pre>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
+<div id="calculating-the-total-number-of-missing-values-in-the-dataset" class="section level3">
+<h3>Calculating the total number of missing values in the dataset</h3>
+<pre class="r"><code>naData &lt;- subset(data, is.na(data$steps)|is.na(data$interval))
+naDataCount &lt;- nrow(naData)</code></pre>
+<div id="the-total-number-of-missing-values-in-the-dataset-2304" class="section level4">
+<h4>The total number of missing values in the dataset: 2304</h4>
+</div>
+</div>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>

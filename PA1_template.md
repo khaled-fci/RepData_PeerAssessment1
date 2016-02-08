@@ -66,6 +66,14 @@ maxAverageInterval <- row$interval
 
 ## Imputing missing values
 
+### Calculating the total number of missing values in the dataset
+
+```r
+naData <- subset(data, is.na(data$steps)|is.na(data$interval))
+naDataCount <- nrow(naData)
+```
+
+#### The total number of missing values in the dataset: 2304
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
