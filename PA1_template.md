@@ -50,11 +50,19 @@ qplot(data2$steps, geom="histogram", main="Total number of steps taken each day"
 
 
 ```r
-library(dplyr)
 data$interval <- as.numeric(data$interval)
-dataAverages <- data %>% group_by(interval) %>% summarize(mean(steps))
+dataAverages <- aggregate(steps ~ interval, data, mean, na.rm=TRUE)
+ggplot(dataAverages, aes(interval, steps)) + geom_line()
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)
+
+
+```r
+row <- dataAverages[which(dataAverages$steps == max(dataAverages$steps, na.rm=TRUE)),]
+maxAverageInterval <- row$interval
+```
+#### The time interval that contains the maximum number of steps: 835
 
 ## Imputing missing values
 
