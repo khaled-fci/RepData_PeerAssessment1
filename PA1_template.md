@@ -76,4 +76,50 @@ naDataCount <- nrow(naData)
 #### The total number of missing values in the dataset: 2304
 
 
+```r
+dataImputted <- data
+
+dataImputted$interval <- as.numeric(dataImputted$interval)
+dataImputted$steps <- as.numeric(dataImputted$steps)
+
+dataMeanPerInterval <- aggregate(steps ~ interval, dataImputted, mean, rm.na=TRUE)
+
+dataImputted$steps <- apply(dataImputted, 1, function(x)
+	{
+  	steps <- as.numeric(x["steps"])
+  	interval <- as.numeric(x["interval"])
+  
+    if(is.na(steps)) {
+      
+      stepsMean <- dataMeanPerInterval$steps[(dataMeanPerInterval$interval == interval)]
+      
+      # print(class(stepsMean))
+
+      x["steps"] <- stepsMean
+    }
+  
+    as.numeric(x["steps"])
+		
+	})
+```
+
+#### Histogram of the total number of steps taken each day after data are imputted:
+
+
+
+
+```r
+ qplot(dataImputted$steps, geom="histogram", main="Total number of steps taken each day", binwidth=20, xlab="Steps", fill=I("blue"), col=I("red"), alpha=I(.2))
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)
+
+
+```r
+dataAverages <- aggregate(steps ~ interval, dataImputted, mean, na.rm=TRUE)
+ggplot(dataAverages, aes(interval, steps)) + geom_line()
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)
+
 ## Are there differences in activity patterns between weekdays and weekends?
