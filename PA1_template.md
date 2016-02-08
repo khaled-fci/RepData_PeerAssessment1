@@ -106,20 +106,11 @@ dataImputted$steps <- apply(dataImputted, 1, function(x)
 #### Histogram of the total number of steps taken each day after data are imputted:
 
 
-
-
 ```r
  qplot(dataImputted$steps, geom="histogram", main="Total number of steps taken each day", binwidth=20, xlab="Steps", fill=I("blue"), col=I("red"), alpha=I(.2))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)
 
-
-```r
-dataAverages <- aggregate(steps ~ interval, dataImputted, mean, na.rm=TRUE)
-ggplot(dataAverages, aes(interval, steps)) + geom_line()
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
